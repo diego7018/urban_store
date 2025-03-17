@@ -2,6 +2,14 @@ from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 import uvicorn
+import os
+
+# Ruta relativa en el entorno de Render
+image_dir = "images"
+
+# Crear la carpeta si no existe
+if not os.path.exists(image_dir):
+    os.makedirs(image_dir)
 
 app = FastAPI()
 
