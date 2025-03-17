@@ -1,20 +1,22 @@
-from fastapi import FastAPI
-from fastapi.responses import HTMLResponse
-from fastapi.staticfiles import StaticFiles
-import uvicorn
 import os
+from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
+from fastapi import FastAPI
+from fastapi.responses import HTMLResponse 
+import uvicorn
 
-# Ruta relativa en el entorno de Render
+
+app = FastAPI()
+
+# Definir la carpeta de imágenes en el directorio del proyecto
 image_dir = "images"
 
 # Crear la carpeta si no existe
 if not os.path.exists(image_dir):
     os.makedirs(image_dir)
 
-app = FastAPI()
-
-# 🔹 Montar la carpeta de imágenes en FastAPI
-app.mount("/images", StaticFiles(directory="C:/Users/thepa/Desktop/images"), name="images")
+# Montar la carpeta para servir archivos estáticos
+app.mount("/images", StaticFiles(directory=image_dir), name="images")
 
 @app.get("/", response_class=HTMLResponse)
 async def home():
